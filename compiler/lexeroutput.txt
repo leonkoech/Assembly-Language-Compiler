@@ -1,0 +1,134 @@
+1   1   Dec_package   
+2   1   Dec_import   
+3   8   Type_Class   
+3   14   Identifier   javac   
+3   19   LeftBrace   
+4   2   Dec_mainmethod   
+5   2   LeftBrace   
+6   2   Annotation   
+6   3   Identifier   SuppressWarnings   
+6   19   LeftParen   
+6   20   String   resource   
+6   30   RightParen   
+7   1   Identifier   Scanner   
+7   9   Identifier   console   
+7   17   Op_assign   
+7   19   Identifier   new   
+7   23   Identifier   Scanner   
+7   30   LeftParen   
+7   31   Type_boolean   
+7   40   RightParen   
+7   41   Semicolon   
+9   2   Type_int   
+9   6   Identifier   number   
+9   12   Semicolon   
+10   2   Type_char   
+10   7   Identifier   choice   
+10   13   Semicolon   
+11   2   Type_int   
+11   6   Identifier   evenSum   
+11   14   Op_assign   
+11   16   Integer   0   
+11   17   Semicolon   
+12   2   Type_int   
+12   6   Identifier   oddSum   
+12   13   Op_assign   
+12   15   Integer   0   
+12   16   Semicolon   
+14   2   Identifier   do   
+15   2   LeftBrace   
+16   2   Identifier   System   
+16   10   Identifier   ut   
+16   12   Period   
+16   13   Keyword_print   
+16   18   LeftParen   
+16   19   String   Enter the number    
+16   38   RightParen   
+16   39   Semicolon   
+17   2   Identifier   number   
+17   9   Op_assign   
+17   11   Identifier   console   
+17   18   Period   
+17   19   Identifier   nextInt   
+17   26   LeftParen   
+17   27   RightParen   
+17   28   Semicolon   
+21   2   Keyword_if   
+21   4   LeftParen   
+21   6   Identifier   number   
+21   13   Op_mod   
+21   15   Integer   2   
+21   17   Op_equal   
+21   20   Integer   0   
+21   21   RightParen   
+22   2   LeftBrace   
+23   2   Identifier   evenSum   
+23   10   Op_add   
+23   11   Op_assign   
+23   13   Identifier   number   
+23   19   Semicolon   
+24   2   RightBrace   
+26   2   Keyword_else   
+27   2   LeftBrace   
+28   2   Identifier   oddSum   
+28   9   Op_add   
+28   10   Op_assign   
+28   12   Identifier   number   
+28   18   Semicolon   
+29   2   RightBrace   
+31   2   Identifier   System   
+31   10   Identifier   ut   
+31   12   Period   
+31   13   Keyword_print   
+31   18   LeftParen   
+31   19   String   Do you want to continue y/n?    
+31   50   RightParen   
+31   51   Semicolon   
+32   2   Identifier   choice   
+32   9   Op_assign   
+32   11   Identifier   console   
+32   18   Period   
+32   19   Identifier   next   
+32   23   LeftParen   
+32   24   RightParen   
+32   25   Period   
+32   26   Identifier   charAt   
+32   32   LeftParen   
+32   33   Integer   0   
+32   34   RightParen   
+32   35   Semicolon   
+35   2   RightBrace   
+35   3   Keyword_while   
+35   8   LeftParen   
+35   9   Identifier   choice   
+35   15   Op_equal   
+35   17   Integer   121   
+35   21   Op_or   
+35   24   Identifier   choice   
+35   31   Op_equal   
+35   34   Integer   89   
+35   37   RightParen   
+35   38   Semicolon   
+37   2   Identifier   System   
+37   10   Identifier   ut   
+37   12   Period   
+37   13   Keyword_println   
+37   20   LeftParen   
+37   21   String   Sum of even numbers:    
+37   45   Op_add   
+37   47   Identifier   evenSum   
+37   54   RightParen   
+37   55   Semicolon   
+38   2   Identifier   System   
+38   10   Identifier   ut   
+38   12   Period   
+38   13   Keyword_println   
+38   20   LeftParen   
+38   21   String   Sum of odd numbers:    
+38   44   Op_add   
+38   46   Identifier   oddSum   
+38   52   RightParen   
+38   53   Semicolon   
+39   2   RightBrace   
+40   1   RightBrace   
+40   2   End_of_input   
