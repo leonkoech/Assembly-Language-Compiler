@@ -9,11 +9,12 @@ tk_Putc, tk_Lparen, tk_Rparen, tk_Lbrace, tk_Rbrace, tk_Semi, tk_Comma, tk_Ident
 tk_Integer,tk_Rboxbrace,tk_LboxBrace,tk_period, tk_String ,tk_annotation,tk_println,       \
 tk_hash,tk_colon,tk_PreDirective,tk_IntegerType,tk_CharacterType, tk_ShortType,tk_LongType,\
 tk_FloatType,tk_DoubleType,tk_StringType,tk_BooleanType,tk_ByteType,tk_ArrayType,          \
-tk_ClassType,tk_Public,tk_Private,tk_Static,tk_void,tk_import,tk_package ,tk_mainmethod= range(57)
- 
+tk_ClassType,tk_Public,tk_Private,tk_Static,tk_void,tk_import,tk_package ,tk_mainmethod,   \
+tk_scanner,tk_new= range(59)
+
 nd_Ident, nd_String, nd_Integer, nd_Sequence, nd_If, nd_Prtc, nd_Prts, nd_Prti, nd_While, \
 nd_Assign, nd_Negate, nd_Not, nd_Mul, nd_Div, nd_Mod, nd_Add, nd_Sub, nd_Lss, nd_Leq,     \
-nd_Gtr, nd_Geq, nd_Eql, nd_Neq, nd_And, nd_Or = range(25)
+nd_Gtr, nd_Geq, nd_Eql, nd_Neq, nd_And, nd_Or, nd_Print = range(26)
  
 # must have same order as above
 Tokens = [
@@ -56,7 +57,27 @@ Tokens = [
     ["#"               , False, False, False, -1, -1        ],
     [":"               , False, False, False, -1, -1        ],
     ["Preprocessor"    , False, False, False, -1, -1        ],
-
+    ['Int type'        , False, False, False, -1, -1        ],
+    ['char type'       , False, False, False, -1, -1        ],
+    ['short type'      , False, False, False, -1, -1        ],
+    ['long type'       , False, False, False, -1, -1        ],
+    ['float type'      , False, False, False, -1, -1        ],
+    ['double type'     , False, False, False, -1, -1        ],
+    ['String type'     , False, False, False, -1, -1        ],
+    ['Boolean type'    , False, False, False, -1, -1        ],
+    ['Byte type'       , False, False, False, -1, -1        ],
+    ['Array type'      , False, False, False, -1, -1        ],
+    ['Class type'      , False, False, False, -1, -1        ],
+    ['Public dec'      , False, False, False, -1, -1        ],
+    ['Private dec'     , False, False, False, -1, -1        ],
+    ['Static dec'      , False, False, False, -1, -1        ],
+    ['void dec'        , False, False, False, -1, -1        ],
+    ['import dec'      , False, False, False, -1, -1        ],
+    ['package dec'     , False, False, False, -1, -1        ],
+    ['mainmethod dec'  , False, False, False, -1, -1        ],
+    ['scanner dec'     , False, False, False, -1, -1        ],
+    ['new key'         , False, False, False, -1, -1        ],
+    ['Print lit'       , False, False, False, -1, nd_Print  ]
     ]
  
 all_syms = {"End_of_input"   : tk_EOI,     "Op_multiply"    : tk_Mul,
@@ -69,7 +90,7 @@ all_syms = {"End_of_input"   : tk_EOI,     "Op_multiply"    : tk_Mul,
             "Op_assign"      : tk_Assign,  "Op_and"         : tk_And,
             "Op_or"          : tk_Or,      "Keyword_if"     : tk_If,
             "Keyword_else"   : tk_Else,    "Keyword_while"  : tk_While,
-            "Keyword_print"  : tk_Print,   "Keyword_putc"   : tk_Putc,
+            "Keyword_input"  : tk_Print,   "Keyword_putc"   : tk_Putc,
             "LeftParen"      : tk_Lparen,  "RightParen"     : tk_Rparen,
             "LeftBrace"      : tk_Lbrace,  "RightBrace"     : tk_Rbrace,
             "Semicolon"      : tk_Semi,    "Comma"          : tk_Comma,
@@ -77,14 +98,26 @@ all_syms = {"End_of_input"   : tk_EOI,     "Op_multiply"    : tk_Mul,
             "RightBoxBrace"  : tk_Rboxbrace,"LeftBoxBrace"  : tk_LboxBrace,
             "Period"         : tk_period,  "String"         : tk_String,
             "Annotation"     : tk_annotation,"Keyword_println": tk_println,
-            "Hash"           : tk_hash,     ":"             : tk_colon,
-            "Preprocessor"   : tk_PreDirective}
+            "Hash"           : tk_hash,     "Colon"         : tk_colon,
+            "Preprocessor"   : tk_PreDirective,"Type_int"   : tk_IntegerType,
+            "Type_char"      : tk_CharacterType,"Type_short": tk_ShortType,
+            "Type_long"      : tk_LongType,"Type_float"     : tk_FloatType,
+            "Type_double"    : tk_DoubleType,"Type_String"  : tk_StringType,
+            "Type_boolean"   : tk_BooleanType,"Type_Byte"   : tk_ByteType,
+            "Type_Arrays"    : tk_ArrayType,"Type_Class"    : tk_ClassType,
+            'Dec_Public'     : tk_Public,"Dec_private"      : tk_Private,
+            "Dec_static"     : tk_Static,'Dec_void'         : tk_void,
+            'Dec_import'     : tk_import,'Dec_package'      : tk_package,
+            'Dec_mainmethod' : tk_mainmethod,"Type_Scanner"  : tk_scanner,
+            'Type_new'       : tk_new,}
  
 Display_nodes = ["Identifier","String", "Integer", "Sequence", "If", "Prtc", "Prts",
     "Prti", "While", "Assign", "Negate", "Not", "Multiply", "Divide", "Mod", "Add",
     "Subtract", "Less", "LessEqual", "Greater", "GreaterEqual", "Equal", "NotEqual",
-    "And", "Or"]
- 
+    "And", "Or","Print"]
+
+datatypes={tk_IntegerType,tk_CharacterType,tk_ShortType,tk_LongType,tk_DoubleType,
+    tk_StringType,tk_BooleanType,tk_ByteType,tk_ArrayType}
 TK_NAME         = 0
 TK_RIGHT_ASSOC  = 1
 TK_IS_BINARY    = 2
@@ -168,6 +201,12 @@ def expr(p):
     elif tok == tk_Integer:
         x = make_leaf(nd_Integer, tok_other)
         gettok()
+    elif tok== tk_scanner:
+        gettok()
+        if tok==tk_Print:
+            gettok()
+            if tok == tk_Rparen:
+                gettok()
     else:
         error("Expecting a primary, found: %s" % (Tokens[tok][TK_NAME]))
  
@@ -208,7 +247,7 @@ def stmt():
         e = paren_expr()
         t = make_node(nd_Prtc, e)
         expect("Putc", tk_Semi)
-    elif tok == tk_Print or tok==tk_println:
+    elif tok==tk_println:
         gettok()
         expect("Print", tk_Lparen)
         while True:
@@ -224,23 +263,24 @@ def stmt():
             gettok()
         expect("Print", tk_Rparen)
         expect("Print", tk_Semi)
+    
     elif tok == tk_Semi:
         gettok()
     elif tok == tk_Ident:
         v = make_leaf(nd_Ident, tok_other)
         gettok()
+        if tok==tk_Assign:
         # bc it's java we shouldex
-        try:
             expect("assign", tk_Assign)
             e = expr(0)
             t = make_node(nd_Assign, v, e)
             expect("assign", tk_Semi)
+        if tok==tk_Semi:
+            expect("semi", tk_Semi)
+            e = expr(0)
+            t = make_node(nd_Assign, v, e)
+           
         # if the next character is not assignment opoerator
-        except:
-            expect("ident",tk_Ident)
-            e = paren_expr()
-            s = stmt()
-            t = make_node(nd_Ident, e, s)
        
     elif tok == tk_While:
         gettok()
@@ -249,7 +289,9 @@ def stmt():
         t = make_node(nd_While, e, s)
     elif tok == tk_Lbrace:
         gettok()
+        
         while tok != tk_Rbrace and tok != tk_EOI:
+            
             t = make_node(nd_Sequence, t, stmt())
         expect("Lbrace", tk_Rbrace)
     elif tok == tk_LboxBrace:
@@ -261,11 +303,51 @@ def stmt():
     elif tok == tk_PreDirective:
         # ignore the preprocessor
         gettok()
+    elif tok==tk_package or tok==tk_mainmethod or tok==tk_import or tok==tk_annotation:
+        gettok()
+    elif tok == tk_scanner:
+        gettok()
+        if tok == tk_Ident:
+            v = make_leaf(nd_Ident, tok_other)
+            gettok()
+            expect("assign", tk_Assign)
+            e = expr(0)
+            t = make_node(nd_Assign, v, e)
+            expect("assign", tk_Semi)
+        elif tok==tk_Lbrace:
+            gettok()
+            while tok != tk_Rbrace and tok != tk_EOI:
+                t = make_node(nd_Sequence, t, stmt())
+            expect("Lbrace", tk_Rbrace)
+    elif tok==tk_import:
+        gettok()
+    elif tok==tk_Print:
+        gettok()
+        if tok == tk_Rparen:
+            gettok()
+            if tok == tk_Semi:
+                gettok()
+        else:
+            print('problem here')
 
-    elif tok == tk_EOI:
-        pass
+    elif tok==tk_ClassType:
+        gettok()
+        # after class expect an identifier. Class name
+        expect("ident",tk_Ident)
+    elif tok==tk_new:
+        gettok()
+    # elif tok == tk_EOI:
+    #     pass
     else:
-        error("Expecting start of statement, found: %s" % (Tokens[tok][TK_NAME]))
+        for b in datatypes:
+            if tok==b or tk_Ident:
+                gettok()
+                if tok == tk_EOI:
+                    break
+            elif tok == tk_EOI:
+                pass
+            else:
+                error("Expecting start of statement, found: %s" % (Tokens[tok][TK_NAME]))
  
     return t
  

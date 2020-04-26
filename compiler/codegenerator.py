@@ -2,11 +2,11 @@ from __future__ import print_function
 import os,sys, struct, shlex, operator
 
 
-# os.system('python3 syntaxanalyser.py')
+os.system('python3 syntaxanalyser.py')
  
 nd_Ident, nd_String, nd_Integer, nd_Sequence, nd_If, nd_Prtc, nd_Prts, nd_Prti, nd_While, \
 nd_Assign, nd_Negate, nd_Not, nd_Mul, nd_Div, nd_Mod, nd_Add, nd_Sub, nd_Lss, nd_Leq,     \
-nd_Gtr, nd_Geq, nd_Eql, nd_Neq, nd_And, nd_Or = range(25)
+nd_Gtr, nd_Geq, nd_Eql, nd_Neq, nd_And, nd_Or, nd_Print = range(26)
  
 all_syms = {
     "Identifier"  : nd_Ident,    "String"      : nd_String,
@@ -21,7 +21,7 @@ all_syms = {
     "LessEqual"   : nd_Leq,      "Greater"     : nd_Gtr,
     "GreaterEqual": nd_Geq,      "Equal"       : nd_Eql,
     "NotEqual"    : nd_Neq,      "And"         : nd_And,
-    "Or"          : nd_Or}
+    "Or"          : nd_Or,       "print"       : nd_Print}
  
 FETCH, STORE, PUSH, ADD, SUB, MUL, DIV, MOD, LT, GT, LE, GE, EQ, NE, AND, OR, NEG, NOT, \
 JMP, JZ, PRTC, PRTS, PRTI, HALT = range(24)

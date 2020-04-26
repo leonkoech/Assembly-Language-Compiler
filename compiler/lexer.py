@@ -9,27 +9,28 @@ tk_Putc, tk_Lparen, tk_Rparen, tk_Lbrace, tk_Rbrace, tk_Semi, tk_Comma, tk_Ident
 tk_Integer,tk_Rboxbrace,tk_LboxBrace,tk_period, tk_String ,tk_annotation,tk_println,       \
 tk_hash,tk_colon,tk_PreDirective,tk_IntegerType,tk_CharacterType, tk_ShortType,tk_LongType,\
 tk_FloatType,tk_DoubleType,tk_StringType,tk_BooleanType,tk_ByteType,tk_ArrayType,          \
-tk_ClassType,tk_Public,tk_Private,tk_Static,tk_void,tk_import,tk_package ,tk_mainmethod= range(57)
+tk_ClassType,tk_Public,tk_Private,tk_Static,tk_void,tk_import,tk_package ,tk_mainmethod,    \
+tk_scanner,tk_new= range(59)
  
 all_syms = ["End_of_input", "Op_multiply", "Op_divide", "Op_mod", "Op_add", "Op_subtract",
     "Op_negate", "Op_not", "Op_less", "Op_lessequal", "Op_greater", "Op_greaterequal",
     "Op_equal", "Op_notequal", "Op_assign", "Op_and", "Op_or", "Keyword_if",
-    "Keyword_else", "Keyword_while", "Keyword_print", "Keyword_putc", "LeftParen",
+    "Keyword_else", "Keyword_while", "Keyword_input", "Keyword_putc", "LeftParen",
     "RightParen", "LeftBrace", "RightBrace", "Semicolon", "Comma", "Identifier",
     "Integer","RightBoxBrace","LeftBoxBrace","Period", "String","Annotation","Keyword_println",
     "Hash","Colon","Preprocessor","Type_int","Type_char","Type_short","Type_long","Type_float","Type_double",
     "Type_String","Type_boolean","Type_Byte","Type_Arrays","Type_Class",'Dec_Public',"Dec_private","Dec_static",
-    'Dec_void','Dec_import','Dec_package','Dec_mainmethod']
+    'Dec_void','Dec_import','Dec_package','Dec_mainmethod','Type_Scanner','Type_new']
  
 # single character only symbols
 symbols = { '{': tk_Lbrace, '}': tk_Rbrace, '(': tk_Lparen, ')': tk_Rparen, '+': tk_Add, '-': tk_Sub,
     '*': tk_Mul, '%': tk_Mod, ';': tk_Semi, ',': tk_Comma ,']':tk_Rboxbrace,'[':tk_LboxBrace,'.':tk_period,'@':tk_annotation,
     '#':tk_hash,':':tk_colon}
  
-key_words = {'if': tk_If, 'else': tk_Else, 'print': tk_Print, 'putc': tk_Putc, 'while': tk_While,'println':tk_println}
+key_words = {'if': tk_If, 'else': tk_Else, 'in': tk_Print, 'putc': tk_Putc, 'while': tk_While,'println':tk_println}
 
 data_types={'int':tk_IntegerType,'char':tk_CharacterType,'short':tk_ShortType,'long':tk_LongType,'float':tk_LongType,'double':tk_DoubleType,
-    'String':tk_StringType,'boolean':tk_BooleanType,'byte':tk_ByteType,'Array':tk_ArrayType,'class':tk_ClassType}
+    'String':tk_StringType,'boolean':tk_BooleanType,'byte':tk_ByteType,'Array':tk_ArrayType,'class':tk_ClassType,'Scanner':tk_scanner,'new':tk_new}
 
 decalrative={'public':tk_Public,'Private':tk_Private,'static':tk_Static,'void':tk_void,'import':tk_import,'package':tk_package}
 
@@ -125,7 +126,17 @@ def check_word(word):
         if next_ch()==b:
             next_ch()
             return True
-    
+def annotate(err_line, err_col):
+    next_ch()
+    while True:
+        for b in range(0,20):
+            if the_ch==')':
+                next_ch()
+                return tk_annotation,err_line, err_col
+            else:
+                next_ch()
+    while False:
+        return tk_annotation,err_line, err_col
 def importpkg(err_line,err_col):
     next_ch()
     while True:
@@ -240,7 +251,16 @@ def ident_or_int(err_line, err_col):
         return key_words[text], err_line, err_col
     #handling data types
     if text in data_types:
-        return data_types[text],err_line,err_col
+        if text == 'new':# make a dictionary for these words
+            return gettok()
+        if text == 'Scanner':
+                
+                if  next_ch() =='S':
+                    return data_types[text],err_line,err_col
+                else:
+                    return gettok()
+        else:
+            return data_types[text],err_line,err_col
     if text=='class':
             return tk_ClassType,err_line,err_col
     if text in decalrative:
@@ -262,12 +282,12 @@ def ident_or_int(err_line, err_col):
         next_ch()
         if the_ch=='n':
             gettok()
-            return tk_BooleanType,err_line,err_col
+            return tk_Print,err_line,err_col
         elif the_ch=='o':
             check_print(err_line,err_col)
             return tk_println,err_line,err_col
 
-
+     
  
     return tk_Ident, err_line, err_col, text
  
@@ -301,6 +321,7 @@ def gettok():
     elif the_ch == '&':     return follow('&', tk_And, tk_EOI,    err_line, err_col)
     elif the_ch == '|':     return follow('|', tk_Or,  tk_EOI,    err_line, err_col)
     elif the_ch == '"':     return string_lit(the_ch, err_line, err_col)
+    elif the_ch == "@":     return annotate(err_line, err_col)
     # if statement begins with import or package print the whole line as package_import and package_name
     elif the_ch in symbols:
         sym = symbols[the_ch]

@@ -6,17 +6,10 @@
 4   2   Dec_mainmethod   
 5   2   LeftBrace   
 6   2   Annotation   
-6   3   Identifier   SuppressWarnings   
-6   19   LeftParen   
-6   20   String   resource   
-6   30   RightParen   
-7   1   Identifier   Scanner   
 7   9   Identifier   console   
 7   17   Op_assign   
-7   19   Identifier   new   
-7   23   Identifier   Scanner   
-7   30   LeftParen   
-7   31   Type_boolean   
+7   23   Type_Scanner   
+7   31   Keyword_input   
 7   40   RightParen   
 7   41   Semicolon   
 9   2   Type_int   
@@ -40,7 +33,7 @@
 16   2   Identifier   System   
 16   10   Identifier   ut   
 16   12   Period   
-16   13   Keyword_print   
+16   13   Identifier   print   
 16   18   LeftParen   
 16   19   String   Enter the number    
 16   38   RightParen   
@@ -79,7 +72,7 @@
 31   2   Identifier   System   
 31   10   Identifier   ut   
 31   12   Period   
-31   13   Keyword_print   
+31   13   Identifier   print   
 31   18   LeftParen   
 31   19   String   Do you want to continue y/n?    
 31   50   RightParen   
