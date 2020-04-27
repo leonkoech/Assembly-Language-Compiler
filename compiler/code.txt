@@ -1,0 +1,40 @@
+package jcompiler;
+import java.util.Scanner;
+public class javac{
+ public static void main(String[] args)
+ {
+ @SuppressWarnings("resource")
+Scanner console = new Scanner(System.in);
+
+ int number;
+ char choice;
+ int evenSum = 0;
+ int oddSum = 0;
+
+ do
+ {
+ printf("Enter the number ");
+ number = console.nextInt();
+
+ /* determines an interger if it is even by dividing it by */
+ /* two and find if it has no remainder thus even */
+ if( number % 2 == 0)
+ {
+     evenSum += number;
+ }
+ /* check if the integer is not even then its odd(has a remainder) */
+ else
+ {
+ oddSum += number;
+ }
+
+ print("Do you want to continue y/n? ");
+ choice = console.next().charAt(0);
+
+ /* prompts the user to choose where to enter another integer */
+ }while(choice=='y' || choice == 'Y');
+
+ System.out.println("Sum of even numbers: " + evenSum);
+ System.out.println("Sum of odd numbers: " + oddSum);
+ }
+}

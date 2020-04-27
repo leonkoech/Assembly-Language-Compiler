@@ -1,0 +1,129 @@
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+;   
+;   
+;   
+;   
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+;   
+;   
+;   
+;   
+;   
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+;   
+;   
+Assign      
+Identifier   console   
+;   
+;   
+;   
+;   
+;   
+Identifier   None   
+Identifier   None   
+Assign      
+Identifier   evenSum   
+Integer   0   
+;   
+Assign      
+Identifier   oddSum   
+Integer   0   
+;   
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+Sequence      
+;   
+;   
+;   
+Assign      
+Identifier   number   
+Identifier   console   
+;   
+;   
+If      
+Equal      
+Mod      
+Identifier   number   
+Integer   2   
+Integer   0   
+If      
+Sequence      
+;   
+AddAssign      
+Identifier   evenSum   
+AddAssign      
+Identifier   number   
+;   
+Sequence      
+;   
+AddAssign      
+Identifier   oddSum   
+AddAssign      
+Identifier   number   
+;   
+Sequence      
+;   
+Prti      
+;   
+;   
+Assign      
+Identifier   choice   
+Identifier   console   
+;   
+;   
+;   
+;   
+While      
+Or      
+Equal      
+Identifier   choice   
+Integer   121   
+Equal      
+Identifier   choice   
+Integer   89   
+;   
+;   
+Sequence      
+;   
+Prts      
+;   
+;   
+;   
+Sequence      
+;   
+Prts      
+;   
+;   

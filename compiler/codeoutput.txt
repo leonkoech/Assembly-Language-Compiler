@@ -1,0 +1,40 @@
+Datasize:   6   Strings:   0   
+0    store   [0]   
+5   fetch   [1]   
+10   fetch   [1]   
+15   push    0   
+20   store   [2]   
+25   push    0   
+30   store   [3]   
+35   fetch   [0]   
+40   store   [4]   
+45   fetch   [4]   
+50   push    2   
+55   mod   
+56   push    0   
+61   eq   
+62   jz      21   84   
+67   fetch   [2]   
+72   fetch   [4]   
+77   ne   
+78   ne   
+79   jmp     16   96   
+84   fetch   [3]   
+89   fetch   [4]   
+94   ne   
+95   ne   
+96   prti   
+97   fetch   [0]   
+102   store   [5]   
+107   fetch   [5]   
+112   push    121   
+117   eq   
+118   fetch   [5]   
+123   push    89   
+128   eq   
+129   or   
+130   jz      9   140   
+135   jmp     -29   107   
+140   prts   
+141   prts   
+142   halt   
