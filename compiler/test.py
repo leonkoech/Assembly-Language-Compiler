@@ -1,12 +1,12 @@
-word='calmrtyrt'
-# get the first two characters
-wordss=[]
-for c in word:
-    wordss.append(c)
-l1=wordss[0]
-l2=wordss[1]
-word=word.replace(l1, '', 1)
-word= word.replace(l2, '', 1)
-print(word)
-
-
+pt=[['hello','you are'],['hfsdgfjs'],['dsfsdf'],['rtyry'],['ewwewe'],['tyutyuytu'],['eresre'],['sfff'],['you aer']]
+def arrtostr(ite):
+    strr=''
+    for b in ite:
+        strr+=str(b)+'   '
+    return strr
+with  open('test.txt', 'w+') as doc:
+    for item in pt[:-1]:
+        doc.write(arrtostr(item)+'\n')
+        # doc.close()
+    else:
+        doc.write(arrtostr(pt[-1]))

@@ -175,7 +175,7 @@ def code_finish():
 codegenarr=[]
 def list_code():
     print("Datasize: %d Strings: %d" % (len(globals), len(string_pool)))
-    codegenarr.append(['Datasize','Strings',len(globals),len(string_pool)])
+    codegenarr.append(['Datasize:',len(globals),'Strings:',len(string_pool)])
     for k in sorted(string_pool, key=string_pool.get):
         print(k)
         codegenarr.append([k])
@@ -187,85 +187,92 @@ def list_code():
         if op == FETCH:
             x = bytes_to_int(code[pc:pc+word_size])[0]
             print("fetch [%d]" % (x))
-            codegenarr.append([pc,x])
+            codegenarr.append([pc-1,"fetch" ,[x]])
             pc += word_size
         elif op == STORE:
             x = bytes_to_int(code[pc:pc+word_size])[0]
             print("store [%d]" % (x))
-            codegenarr.append([pc,x])
+            if pc-1<10:
+                codegenarr.append([pc-1," store" ,[x]])
+            else:
+                codegenarr.append([pc-1,"store" ,[x]])
+            
             pc += word_size
         elif op == PUSH:
             x = bytes_to_int(code[pc:pc+word_size])[0]
             print("push  %d" % (x))
-            codegenarr.append([pc,x])
+            if pc-1<10:
+                codegenarr.append([pc-1," push ",x])
+            else:
+                codegenarr.append([pc-1,"push ",x])
             pc += word_size
         elif op == ADD:   
             print("add")
-            codegenarr.append([pc,'add'])
+            codegenarr.append([pc-1,'add'])
         elif op == SUB:   
             print("sub")
-            codegenarr.append([pc,'sub'])
+            codegenarr.append([pc-1,'sub'])
         elif op == MUL:   
             print("mul")
-            codegenarr.append([pc,'mul'])
+            codegenarr.append([pc-1,'mul'])
         elif op == DIV:   
             print("div")
-            codegenarr.append([pc,'div'])
+            codegenarr.append([pc-1,'div'])
         elif op == MOD:   
             print("mod")
-            codegenarr.append([pc,'mod'])
+            codegenarr.append([pc-1,'mod'])
         elif op == LT:    
             print("lt")
-            codegenarr.append([pc,'lt'])
+            codegenarr.append([pc-1,'lt'])
         elif op == GT:    
             print("gt")
-            codegenarr.append([pc,'gt'])
+            codegenarr.append([pc-1,'gt'])
         elif op == LE:    
             print("le")
-            codegenarr.append([pc,'le'])
+            codegenarr.append([pc-1,'le'])
         elif op == GE:    
             print("ge")
-            codegenarr.append([pc,'ge'])
+            codegenarr.append([pc-1,'ge'])
         elif op == EQ:    
             print("eq")
-            codegenarr.append([pc,'eq'])
+            codegenarr.append([pc-1,'eq'])
         elif op == NE:    
             print("ne")
-            codegenarr.append([pc,'ne'])
+            codegenarr.append([pc-1,'ne'])
         elif op == AND:   
             print("and")
-            codegenarr.append([pc,'and'])
+            codegenarr.append([pc-1,'and'])
         elif op == OR:    
             print("or")
-            codegenarr.append([pc,'or'])
+            codegenarr.append([pc-1,'or'])
         elif op == NEG:   
             print("neg")
-            codegenarr.append([pc,'neg'])
+            codegenarr.append([pc-1,'neg'])
         elif op == NOT:   
             print("not")
-            codegenarr.append([pc,'not'])
+            codegenarr.append([pc-1,'not'])
         elif op == JMP:
             x = bytes_to_int(code[pc:pc+word_size])[0]
             print("jmp    (%d) %d" % (x, pc + x))
-            codegenarr.append([pc,'jmp',x, pc + x])
+            codegenarr.append([pc-1,'jmp  ',(x), pc + x])
             pc += word_size
         elif op == JZ:
             x = bytes_to_int(code[pc:pc+word_size])[0]
             print("jz     (%d) %d" % (x, pc + x))
-            codegenarr.append([pc,'jz',x, pc + x])
+            codegenarr.append([pc-1,'jz   ',(x), pc + x])
             pc += word_size
         elif op == PRTC:  
             print("prtc")
-            codegenarr.append([pc,'prtc'])
+            codegenarr.append([pc-1,'prtc'])
         elif op == PRTI:  
             print("prti")
-            codegenarr.append([pc,'prti'])
+            codegenarr.append([pc-1,'prti'])
         elif op == PRTS:  
             print("prts")
-            codegenarr.append([pc,'prts'])
+            codegenarr.append([pc-1,'prts'])
         elif op == HALT:  
             print("halt")
-            codegenarr.append([pc,'halt'])
+            codegenarr.append([pc-1,'halt'])
         else: 
             error("list_code: Unknown opcode"+str(op))
  
@@ -304,6 +311,7 @@ def arrtostr(ite):
     for b in ite:
         strr+=str(b)+'   '
     return strr
+print(codegenarr)
 print('\nwriting to codeoutput.txt...............................')
 with  open('codeoutput.txt', 'w+') as doc:
     for line in codegenarr:

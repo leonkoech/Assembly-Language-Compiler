@@ -280,12 +280,21 @@ def ident_or_int(err_line, err_col):
         
         next_ch()
         next_ch()
+        # print(the_ch)
         if the_ch=='n':
             gettok()
             return tk_Print,err_line,err_col
-        elif the_ch=='o':
-            check_print(err_line,err_col)
-            return tk_println,err_line,err_col
+        elif the_ch=='u':
+            for g in range(0,20):
+                if the_ch=='n':
+                    next_ch()
+                    for b in range(0,10):
+                        if the_ch=='(':
+                            return tk_println,err_line,err_col
+                        else:
+                            next_ch()
+                else:
+                    next_ch()
 
      
  
@@ -371,7 +380,11 @@ def arrtostr(ite):
     return strr
 print('writing to lexeroutput.txt.................................')
 with  open('lexeroutput.txt', 'w+') as doc:
-    for line in lex:
+    for line in lex[:-1]:
         doc.write(arrtostr(line)+'\n')
+    else:
+        doc.write(arrtostr(lex[-1]))
     doc.close()
 print('sucessfully written to lexeroutput.txt ✔️\n')
+# remove empty lines now
+

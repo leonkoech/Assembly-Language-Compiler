@@ -140,7 +140,9 @@ def error(msg):
 def gettok():
     global err_line, err_col, tok, tok_text, tok_other
     line = input_file.readline()
+    # line = line[:-1]
     if len(line) == 0:
+        print(line)
         error("empty line")
  
     line_list = shlex.split(line, False, False)
@@ -207,6 +209,8 @@ def expr(p):
             gettok()
             if tok == tk_Rparen:
                 gettok()
+    elif tok==tk_Rparen:
+       pass
     else:
         error("Expecting a primary, found: %s" % (Tokens[tok][TK_NAME]))
  
@@ -254,14 +258,23 @@ def stmt():
             if tok == tk_String:
                 e = make_node(nd_Prts, make_leaf(nd_String, tok_other))
                 gettok()
+                print(tok)
+            if tok==tk_Add:
+                for g in range(0,20):
+                    if tok == tk_Rparen:
+                        e = make_node(nd_Prti, expr(0))
+                    else:
+                        gettok()
+                gettok()
+                print(tok)
             else:
                 e = make_node(nd_Prti, expr(0))
- 
             t = make_node(nd_Sequence, t, e)
-            if tok != tk_Comma:
+            if tok != tk_Comma or tok!=tk_Add :
                 break
             gettok()
-        expect("Print", tk_Rparen)
+         # expect("Print", tk_Rparen)
+        print(tok)
         expect("Print", tk_Semi)
     
     elif tok == tk_Semi:
@@ -275,7 +288,7 @@ def stmt():
             e = expr(0)
             t = make_node(nd_Assign, v, e)
             expect("assign", tk_Semi)
-        if tok==tk_Semi:
+        elif tok==tk_Semi:
             expect("semi", tk_Semi)
             e = expr(0)
             t = make_node(nd_Assign, v, e)
@@ -289,11 +302,24 @@ def stmt():
         t = make_node(nd_While, e, s)
     elif tok == tk_Lbrace:
         gettok()
-        
         while tok != tk_Rbrace and tok != tk_EOI:
-            
             t = make_node(nd_Sequence, t, stmt())
         expect("Lbrace", tk_Rbrace)
+    # elif tok== tk_Rbrace:
+        # gettok()
+        # while True:
+        #     if tok==tk_Rbrace:
+        #         gettok()
+        #         while tok != tk_Rbrace and tok != tk_EOI:
+        #             t = make_node(nd_Sequence, t, stmt())
+        #             expect("Lbrace", tk_Rbrace)
+        #     elif tok==tk_EOI:
+        #         pass
+        #     else:
+        #         gettok()
+        # while False:
+
+        #     pass
     elif tok == tk_LboxBrace:
         gettok()
         while tok != tk_Rboxbrace and tok != tk_EOI:
@@ -319,6 +345,8 @@ def stmt():
             while tok != tk_Rbrace and tok != tk_EOI:
                 t = make_node(nd_Sequence, t, stmt())
             expect("Lbrace", tk_Rbrace)
+        elif tok==tk_Rparen:
+            gettok()
     elif tok==tk_import:
         gettok()
     elif tok==tk_Print:
@@ -336,18 +364,14 @@ def stmt():
         expect("ident",tk_Ident)
     elif tok==tk_new:
         gettok()
-    # elif tok == tk_EOI:
-    #     pass
+    elif tok == tk_EOI:
+        # gettok()
+        pass
+    elif tok==tok==tk_IntegerType or tok==tk_CharacterType or tok==tk_ShortType or tok==tk_LongType or tok==tk_DoubleType or \
+tok==tk_StringType or tok==tk_BooleanType or tok==tk_ByteType or tok==tk_ArrayType:
+        gettok()
     else:
-        for b in datatypes:
-            if tok==b or tk_Ident:
-                gettok()
-                if tok == tk_EOI:
-                    break
-            elif tok == tk_EOI:
-                pass
-            else:
-                error("Expecting start of statement, found: %s" % (Tokens[tok][TK_NAME]))
+       error("Expecting start of statement, found: %s" % (Tokens[tok][TK_NAME]))
  
     return t
  

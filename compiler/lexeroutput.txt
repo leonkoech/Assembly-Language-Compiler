@@ -1,127 +1,100 @@
-1   1   Dec_package   
-2   1   Dec_import   
-3   8   Type_Class   
-3   14   Identifier   javac   
-3   19   LeftBrace   
-4   2   Dec_mainmethod   
-5   2   LeftBrace   
-6   2   Annotation   
-7   9   Identifier   console   
-7   17   Op_assign   
-7   23   Type_Scanner   
-7   31   Keyword_input   
-7   40   RightParen   
-7   41   Semicolon   
-9   2   Type_int   
-9   6   Identifier   number   
-9   12   Semicolon   
-10   2   Type_char   
-10   7   Identifier   choice   
-10   13   Semicolon   
-11   2   Type_int   
-11   6   Identifier   evenSum   
-11   14   Op_assign   
-11   16   Integer   0   
-11   17   Semicolon   
-12   2   Type_int   
-12   6   Identifier   oddSum   
-12   13   Op_assign   
-12   15   Integer   0   
-12   16   Semicolon   
-14   2   Identifier   do   
-15   2   LeftBrace   
-16   2   Identifier   System   
-16   10   Identifier   ut   
-16   12   Period   
-16   13   Identifier   print   
-16   18   LeftParen   
-16   19   String   Enter the number    
-16   38   RightParen   
-16   39   Semicolon   
-17   2   Identifier   number   
-17   9   Op_assign   
-17   11   Identifier   console   
-17   18   Period   
-17   19   Identifier   nextInt   
-17   26   LeftParen   
-17   27   RightParen   
-17   28   Semicolon   
-21   2   Keyword_if   
-21   4   LeftParen   
-21   6   Identifier   number   
-21   13   Op_mod   
-21   15   Integer   2   
-21   17   Op_equal   
-21   20   Integer   0   
-21   21   RightParen   
-22   2   LeftBrace   
-23   2   Identifier   evenSum   
-23   10   Op_add   
-23   11   Op_assign   
-23   13   Identifier   number   
-23   19   Semicolon   
-24   2   RightBrace   
-26   2   Keyword_else   
-27   2   LeftBrace   
-28   2   Identifier   oddSum   
-28   9   Op_add   
-28   10   Op_assign   
-28   12   Identifier   number   
-28   18   Semicolon   
-29   2   RightBrace   
-31   2   Identifier   System   
-31   10   Identifier   ut   
-31   12   Period   
-31   13   Identifier   print   
-31   18   LeftParen   
-31   19   String   Do you want to continue y/n?    
-31   50   RightParen   
-31   51   Semicolon   
-32   2   Identifier   choice   
-32   9   Op_assign   
-32   11   Identifier   console   
-32   18   Period   
-32   19   Identifier   next   
-32   23   LeftParen   
-32   24   RightParen   
-32   25   Period   
-32   26   Identifier   charAt   
-32   32   LeftParen   
-32   33   Integer   0   
-32   34   RightParen   
-32   35   Semicolon   
-35   2   RightBrace   
-35   3   Keyword_while   
-35   8   LeftParen   
-35   9   Identifier   choice   
-35   15   Op_equal   
-35   17   Integer   121   
-35   21   Op_or   
-35   24   Identifier   choice   
-35   31   Op_equal   
-35   34   Integer   89   
-35   37   RightParen   
-35   38   Semicolon   
-37   2   Identifier   System   
-37   10   Identifier   ut   
-37   12   Period   
-37   13   Keyword_println   
-37   20   LeftParen   
-37   21   String   Sum of even numbers:    
-37   45   Op_add   
-37   47   Identifier   evenSum   
-37   54   RightParen   
-37   55   Semicolon   
-38   2   Identifier   System   
-38   10   Identifier   ut   
-38   12   Period   
-38   13   Keyword_println   
-38   20   LeftParen   
-38   21   String   Sum of odd numbers:    
-38   44   Op_add   
-38   46   Identifier   oddSum   
-38   52   RightParen   
-38   53   Semicolon   
-39   2   RightBrace   
-40   1   RightBrace   
-40   2   End_of_input   
+1   1   Dec_mainmethod   
+1   8   Type_Class   
+1   14   Identifier   JavaExample   
+1   26   LeftBrace   
+3   5   Dec_mainmethod   
+3   17   Identifier   calculate   
+3   26   LeftParen   
+3   27   Type_int   
+3   31   Identifier   p   
+3   32   Comma   
+3   34   Type_int   
+3   38   Identifier   t   
+3   39   Comma   
+3   41   Type_double   
+3   48   Identifier   r   
+3   49   Comma   
+3   51   Type_int   
+3   55   Identifier   n   
+3   56   RightParen   
+3   58   LeftBrace   
+4   9   Type_double   
+4   16   Identifier   amount   
+4   23   Op_assign   
+4   25   Identifier   p   
+4   27   Op_multiply   
+4   29   Identifier   Math   
+4   33   Period   
+4   34   Identifier   pow   
+4   37   LeftParen   
+4   38   Integer   1   
+4   40   Op_add   
+4   42   LeftParen   
+4   43   Identifier   r   
+4   45   Op_divide   
+4   47   Identifier   n   
+4   48   RightParen   
+4   49   Comma   
+4   51   Identifier   n   
+4   53   Op_multiply   
+4   55   Identifier   t   
+4   56   RightParen   
+4   57   Semicolon   
+5   9   Type_double   
+5   16   Identifier   cinterest   
+5   26   Op_assign   
+5   28   Identifier   amount   
+5   35   Op_subtract   
+5   37   Identifier   p   
+5   38   Semicolon   
+6   9   Keyword_println   
+6   27   LeftParen   
+6   28   String   Compound Interest after    
+6   55   Op_add   
+6   57   Identifier   t   
+6   59   Op_add   
+6   61   String    years:    
+6   71   Op_add   
+6   72   Identifier   cinterest   
+6   81   RightParen   
+6   82   Semicolon   
+7   9   Keyword_println   
+7   27   LeftParen   
+7   28   String   Amount after    
+7   44   Op_add   
+7   46   Identifier   t   
+7   48   Op_add   
+7   50   String    years:    
+7   60   Op_add   
+7   61   Identifier   amount   
+7   67   RightParen   
+7   68   Semicolon   
+8   5   RightBrace   
+9   5   Dec_mainmethod   
+9   41   RightBoxBrace   
+9   42   RightParen   
+9   44   LeftBrace   
+10   6   Identifier   JavaExample   
+10   18   Identifier   obj   
+10   22   Op_assign   
+10   28   Identifier   JavaExample   
+10   39   LeftParen   
+10   40   RightParen   
+10   41   Semicolon   
+11   6   Identifier   obj   
+11   9   Period   
+11   10   Identifier   calculate   
+11   19   LeftParen   
+11   20   Integer   2000   
+11   24   Comma   
+11   26   Integer   5   
+11   27   Comma   
+11   29   Period   
+11   30   Integer   8   
+11   32   Comma   
+11   34   Integer   12   
+11   36   RightParen   
+11   37   Semicolon   
+12   5   RightBrace   
+13   1   RightBrace   
+13   2   End_of_input   

@@ -1,12 +1,11 @@
-Datasize   Strings   2   0   
-1   [0]
-6   [1]
-11   [121[]   
-16   eq   
-17   1   
-22   [89]   
-27   eq   
-28   or   
-29   jz   9   38   
-34   jmp   -29   5   
-39   halt   
+Datasize:   3   Strings:   0   
+0    push    5   
+5    store   [0]   
+10   push    15   
+15   store   [1]   
+20   fetch   [0]   
+25   fetch   [1]   
+30   add   
+31   store   [2]   
+36   prti   
+37   halt   
