@@ -5,7 +5,7 @@
 ![coverage:100%](https://img.shields.io/badge/coverage-100%25-green)
 ![build:passsing](https://img.shields.io/badge/build-passing-brightgreen)
 
-An assembly langauge compiler written in python that outputs the lexer,parser and code generator after being provided with a sample Java or C code in the code.txt file.
+An assembly langauge compiler written in python that outputs the lexer,parser and code generator after being provided with a sample Java or C code in the (code.txt)[https://github.com/leonkoech/Assembly-Language-Compiler/blob/master/compiler/code.txt] file.
 
 ## Requirements
 
